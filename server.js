@@ -6,6 +6,7 @@ const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const { error } = require("console");
+require("dotenv").config();
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-mongoose.connect("mongodb://localhost:27017/nodemailer")
+mongoose.connect(process.env.MONGODB_URL)
 .then(()=>{
     console.log("db Connected");
 })
@@ -122,7 +123,7 @@ app.post("/api/v1/reset-password", async (req, res) => {
 });
 
 
-const PORT = 4000;
+const PORT = process.env.PORT1;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
