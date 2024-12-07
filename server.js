@@ -15,7 +15,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-mongoose.connect(process.env.MONGODB_URL)
+mongoose.connect(process.env.MONGODB_URL,{
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000, // 30 seconds
+  socketTimeoutMS: 45000,          // 45 seconds
+})
 .then(()=>{
     console.log("db Connected");
 })
